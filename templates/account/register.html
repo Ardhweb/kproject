@@ -1,0 +1,25 @@
+{% extends 'account/base.html' %}
+
+{% block title %}<title>Signup</title>{% endblock %}
+{% block content %}
+<h3 class="text-center mt-3">Create an account</h3>
+<div class="d-flex m-1  justify-content-center">
+    <div class="text-left m-1 p-4 border shadow-lg rounded-1">
+        <p class="text-center">Please, sign up using the following form:</p>
+        <form method="post" class=" container  " style="font-weight:600;">
+            {{ user_form.as_p }}
+           
+            {% csrf_token %}
+            <p><input type="checkbox" style="height:20px;width:20px;" id="toggleCheckbox">
+            <label for="toggleCheckbox" class="fw-normal ">Show password</label>
+            </p>
+
+            <p><input type="submit" value="Submit" class="w-50 btn btn-primary  btn-md rounded-1"></p>
+        
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}

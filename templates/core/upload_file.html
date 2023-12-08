@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Upload Files</title>{% endblock %}
+{% block content %}
+
+
+<h4 class="text-center mt-3">Drag Your File's Here</h4>
+<div class="d-flex m-1  justify-content-center">
+    <div class="text-left m-1 p-4 border shadow-sm rounded-1">
+        <form method="post" enctype="multipart/form-data" class=" container  " style="font-weight:600;">
+          
+            {% csrf_token %}
+            {% comment %} {{ upload_form.as_p }} {% endcomment %}
+            <label for="username">{{ upload_form.uploading_file.label }}:</label>
+            <p>{{upload_form.uploading_file}}
+              </p>
+          
+            <p>{{upload_form.user}}</p>
+
+            <p><input type="submit" value="Upload" class="btn btn-warning  btn-md rounded-1"></p>
+        
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}

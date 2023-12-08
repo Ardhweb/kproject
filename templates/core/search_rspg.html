@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if search_results %}
+<div class="d-flex m-4">
+    <h4>Your Search Results:</h4>
+</div>
+<div class="m-3">
+{% for results in search_results  %}
+<a href="{% url 'account:profile-view' results.id %}">
+<div class="card mb-3 " style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4 p-3">
+      {% if results.image %}
+      <img src="{{results.image.url}}" class="img-fluid rounded-circle" alt="...">
+      {% else %}
+      <p>No image available</p>
+      {% endif %}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{results.full_name}}</h5>
+        <p class="card-text">{{results.email}}</p>
+        <small class="text-muted">{{results.bio}}</small>
+      </div>
+    </div>
+  </div>
+</div>
+</a>
+    
+{% endfor %}
+</div>
+{% else %}
+{% endif %}
+
+{% endblock content %}

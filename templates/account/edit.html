@@ -1,0 +1,22 @@
+{% extends 'account/base.html' %}
+
+{% block title %}<title>Profile Edit</title>{% endblock %}
+{% block content %}
+<h3 class="text-center mt-3">Update Your Profile</h3>
+<div class="d-flex m-1  justify-content-center">
+    <div class="text-left m-1 p-4 border shadow-lg rounded-1">
+        <p class="text-center">Please, sign up using the following form:</p>
+        <form method="post" class="" style="font-weight:600;">
+            {{ user_form.as_p }}
+            {{profile_form.as_p}}
+           
+            {% csrf_token %}
+            <p><input type="submit" value="Submit" class="w-50 btn btn-primary  btn-md rounded-1"></p>
+        
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}

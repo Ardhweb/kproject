@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<p>Welcome to Home</p>
+<ul class="messages">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+</ul>
+
+{% if request.user.is_authenticated %}
+<div class="d-flex m-4">
+  <h4>Your Files</h4>
+</div>
+<div class="d-flex m-4">
+
+  {% for files_list in files_list %}
+  
+  {% if files_list.get_thumbnail %}
+    <p>{{files_list.uploading_file.id }}</p>
+  <a  data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{files_list.uploading_file.url}}"  class=" p-2 m-2 shadow-lg "  href="{% url 'core:share_file' files_list.file_id %}">
+    <img class="shadow-sm" style="width:125px; height:125px;" src=" {{files_list.get_thumbnail}}">
+  </a>
+  {% else %}
+  <!--Else if file is not Image then show this-->
+  <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{files_list.uploading_file.url}}" class=" p-2 m-2 " href="{% url 'core:share_file' files_list.file_id %}">
+    <img class="shadow-sm" style="width:125px; height:125px;" src=" {% static 'Icons/icons8-file-128.png' %}">
+  </a>
+  {% endif %}
+  {% endfor %}
+</div>
+{% else %}
+<div class="d-flex justify-content-center   text-center  ">
+ <a class="  nav-link shadow-lg rounded-1  w-50 p-5 " href="{% url 'core:upload-file' %}">
+  <p class="text-center fs-4">Upload New File</p>
+  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
+    <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707z"/>
+    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+  </svg>
+ </a>
+</div>
+{% endif %}
+
+
+
+
+
+{% comment %} {% for file in shared_file %}
+    <p>File ID: <b>{{ file.sharefiles.id }}</b></p>
+    <p>File UUID: <b>{{ file.sharefiles.file_id }}</b></p>
+    <p>File URL: <b>{{ file.sharefiles.uploading_file.url }}  </b></p>
+    <p><b><img class="shadow-sm" style="width:125px; height:125px;" src=" {{ file.sharefiles.uploading_file.url }}  "></b></p>
+    <p>AuthorOwner: <b>{{ file.sharefiles.user }}</b></p>
+    <p>Shared With: <b>{{ file.shared_with.all }}</b></p>
+    <p>Access Level: <b>{{ file.access_level }}</b></p>
+    <p>Shared At: <b>{{ file.created_at }}</b></p>
+    
+{% endfor %} {% endcomment %}
+
+
+
+{% if request.user.is_authenticated %}
+<div class="d-flex m-4">
+  <h4>Shared with me</h4>
+</div>
+<div class="d-flex m-4">
+
+  {% for file in shared_file %}
+  {% if file.sharefiles.get_thumbnail %} 
+  <a  data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{file.sharefiles.uploading_file.url }}"  class=" p-2 m-2 shadow-lg " href=" {{file.uploading_file.id}}">
+    <img class="shadow-sm" style="width:125px; height:125px;" src=" {{file.sharefiles.uploading_file.url}}">
+  </a>
+  {% else %}
+  <!--Else if file is not Image then show this-->
+   <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{file.sharefiles.uploading_file.url}}" class=" p-2 m-2 " href=" {{file.uploading_file.id}}">
+    <img class="shadow-sm" style="width:125px; height:125px;" src=" {% static 'Icons/icons8-file-128.png' %}">
+  </a> 
+   {% endif %} 
+  {% endfor %}
+</div>
+{% else %}
+
+<p>No Files Yet</p>
+
+{% endif %}
+
+
+  
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{{profile.full_name}}
+{{profile.email}}
+{{profile.bio}}
+{{profile.hobby}}
+{% if profile.image %}
+<img src="{{profile.image.url}}">
+{% else %}
+<p>No Image</p>
+{% endif %}
+{% endblock content %}
+
+
+

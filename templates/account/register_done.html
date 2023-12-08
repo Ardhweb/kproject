@@ -1,0 +1,6 @@
+{% extends "account/base.html" %}
+{% block title %}<title>Welcome</title>{% endblock %}
+{% block content %}
+ <h1>Welcome ,{{ request.user.username }}!</h1>
+ <p>Your account has been successfully created. Now you can <a class="text-wrap btn btn-primary btn-sm" href="{% url 'core:home' %}">Go to home.</a>.</p>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Share Files</title>{% endblock %}
+{% block content %}
+
+
+<h4 class="text-center mt-3">Share Your  File's with others:</h4>
+<div class="d-flex m-1  justify-content-center">
+    <div class="text-left m-1 p-4 border shadow-sm rounded-1">
+        <form method="post" enctype="multipart/form-data" class=" container  " style="font-weight:600;">
+          
+            {% csrf_token %}
+            <p><label>{{form.access_level.sharefiles}}</label>{{form.sharefiles}}</p>
+            <p><label>{{form.shared_with.label}}:</label>{{form.shared_with}}</p>
+            <p><label>{{form.access_level.label}}:</label><br>{{form.access_level}}</p>
+           
+
+            <p><input type="submit" value="Share" class="btn btn-warning  btn-md rounded-1"></p>
+        
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}
